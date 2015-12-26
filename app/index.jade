@@ -1,19 +1,29 @@
 extends layouts/default
 
 block content
-  .row#lobbyApp
+  .row#app
     .my-games.pane.col-xs-4
       h2 My games 
       p You have no games. Join one by waiting in the lobby
+      ul
+        li(rv-each-game="games")
+          p your turn: 
+            span(rv-show="game.yourTurn") Play
+            span(rv-hide="game.yourTurn") Not your turn
     .lobby.pane.col-xs-6
-      .text-center(rv-hide = "joined")
+      .text-center(rv-hide = "lobby.joined")
         h2 lobby
         form.form-inline(onsubmit="function(){return undefined}")
           .control-group
             label Username:
-            input.form-control(type = "text" rv-value="name")
+            input.form-control(type = "text" rv-value="lobby.name")
             button.btn.btn-primary(type="button" rv-on-click="register") Join lobby
-      .joined.text-center(rv-show="joined")
+      .joined.text-center(rv-show="lobby.joined")
         h2 Welcome {name}
         p here are the users in the lobby
-  
+        ul
+          li(rv-each-ticket="lobby.tickets")
+            span {ticket.name}
+      .game-ready(rv-show="lobby.gameReady")
+        p game is ready
+          a(rv-href="lobby.gameUrl" rv-on-click="joinGame") Join game
