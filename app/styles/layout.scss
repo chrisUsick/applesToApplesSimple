@@ -1,0 +1,22 @@
+// #main-content {
+//   display: flex;
+//   flex-direction: row;
+// }
+//
+// #main-content > * {
+//   margin: 1em;
+// }
+//
+// .my-games {
+//   flex-basis: 1;
+// }
+//
+// .lobby {
+//   flex-basis: 3;
+// }
+//
+.flex-row-center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

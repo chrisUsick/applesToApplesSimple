@@ -1,0 +1,19 @@
+extends layouts/default
+
+block content
+  .row#lobbyApp
+    .my-games.pane.col-xs-4
+      h2 My games 
+      p You have no games. Join one by waiting in the lobby
+    .lobby.pane.col-xs-6
+      .text-center(rv-hide = "joined")
+        h2 lobby
+        form.form-inline(onsubmit="function(){return undefined}")
+          .control-group
+            label Username:
+            input.form-control(type = "text" rv-value="name")
+            button.btn.btn-primary(type="button" rv-on-click="register") Join lobby
+      .joined.text-center(rv-show="joined")
+        h2 Welcome {name}
+        p here are the users in the lobby
+  
