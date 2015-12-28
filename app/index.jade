@@ -1,16 +1,15 @@
 extends layouts/default
 
 block content
-  .row#app
+  .row
     .my-games.pane.col-xs-4
       h2 My games 
-      p You have no games. Join one by waiting in the lobby
+      p(rv-hide="hasGames") You have no games. Join one by waiting in the lobby
       ul
-        li(rv-each-game="games")
-          p your turn: 
-            span(rv-show="game.yourTurn") Play
-            span(rv-hide="game.yourTurn") Not your turn
-    .lobby.pane.col-xs-6
+        li(rv-each-game="games" rv-on-click="displayGame") {game.id}: 
+          button.btn.btn-success(rv-hide="game.played" ) Play
+          a(rv-show="game.played") Not your turn
+    .lobby.pane.col-xs-6(rv-show="inLobby")
       .text-center(rv-hide = "lobby.joined")
         h2 lobby
         form.form-inline(onsubmit="function(){return undefined}")
@@ -27,3 +26,16 @@ block content
       .game-ready(rv-show="lobby.gameReady")
         p game is ready
           a(rv-href="lobby.gameUrl" rv-on-click="joinGame") Join game
+    .game.pane.col-xs-6(rv-show="currentGame")
+      h2 Game {currentGame.id}
+      p.text-small {currentGame.greenCard.word}: {currentGame.greenCard.description}
+      .row 
+        .col-xs
+          h3 scores
+        .col-xs
+          h3 Red Cards 
+            button(rv-on-click="togglePlayed") toggle Played
+          ul
+            li(rv-each-card="currentGame.redCards")
+              p {card.word}: {card.description}
+              button.btn.btn-default(rv-hide="currentGame.played " rv-on-click="playCard") Play Card

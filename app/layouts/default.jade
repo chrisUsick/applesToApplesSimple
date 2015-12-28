@@ -9,12 +9,13 @@ html(lang='')
     // Place favicon.ico in the root directory
     // build:css styles/vendor.css
     // bower:css
+    link(rel='stylesheet', href='/bower_components/flexboxgrid/dist/flexboxgrid.css')
     // endbower
     // endbuild
     // build:css styles/main.css
     link(rel='stylesheet', href='styles/main.css')
     // endbuild
-  body
+  body#app
     //if lt IE 10
       p.browserupgrade
         | You are using an
@@ -25,12 +26,10 @@ html(lang='')
     .container-fluid
       .header
         ul.nav.nav-pills.pull-right
-          li.active
-            a(href='#') Home
           li
-            a(href='#') About
-          li
-            a(href='#') Contact
+            a(href='#' rv-on-click="showLobby") Lobby
+          li 
+            a(href="#" rv-on-click="showState") Show state
         h3.text-muted applesToApplesSimple
       #main-content
         block content
@@ -45,8 +44,9 @@ html(lang='')
     // build:js scripts/vendor.js
     // bower:js
     script(src='/bower_components/jquery/dist/jquery.js')
-    script(src='bower_components/sightglass/index.js')
-    script(src='bower_components/rivets/dist/rivets.js')
+    script(src='/bower_components/bluebird/js/browser/bluebird.js')
+    script(src='/bower_components/sightglass/index.js')
+    script(src='/bower_components/rivets/dist/rivets.js')
     // endbower
     // endbuild
     // build:js scripts/plugins.js
